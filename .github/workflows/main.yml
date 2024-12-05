@@ -21,10 +21,13 @@ jobs:
       - name: Run convert.sh
         run: ./convert.sh
 
+      - name: Create directory for deployment
+        run: mkdir -p output && mv index.html output/
+
       - name: Upload index.html for deployment
         uses: actions/upload-pages-artifact@v2
         with:
-          path: index.html
+          path: output
 
   deploy:
     needs: convert_and_deploy
