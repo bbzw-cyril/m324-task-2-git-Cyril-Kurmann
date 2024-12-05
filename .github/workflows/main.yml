@@ -6,6 +6,10 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-22.04
     steps:
+      - name: Print working directory
+        run: pwd
+        working-directory: ${{ github.workspace }}
+
       - name: Make convert.sh executable
         run: chmod +x convert.sh
         working-directory: ${{ github.workspace }}
