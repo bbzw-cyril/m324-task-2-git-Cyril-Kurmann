@@ -6,16 +6,12 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-22.04
     steps:
-      - name: List files in the workspace
-        run: cd .. && cd ..
-
-      - name: ls
-        run: ls -al
-
       - name: Make convert.sh executable
         run: chmod +x convert.sh
+        working-directory: ${{ github.workspace }}
 
       - name: Run convert.sh
         run: ./convert.sh
+        working-directory: ${{ github.workspace }}
 
       - uses: docker://pandoc/core:3.5
