@@ -1,9 +1,12 @@
-name: Create index.html from readme.md
+name: run converter and deploy
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  convert_via_pandoc:
+  convert_and_deploy:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
@@ -17,3 +20,18 @@ jobs:
 
       - name: Run convert.sh
         run: ./convert.sh
+
+      - name: Upload index.html for deployment
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: index.html
+
+  deploy:
+    needs: convert_and_deploy
+    runs-on: ubuntu-22.04
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
