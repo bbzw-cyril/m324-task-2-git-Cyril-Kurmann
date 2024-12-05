@@ -9,16 +9,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Print working directory
-        run: pwd
-
-      - name: List files in the root directory
-        run: ls -al
-
       - name: Make convert.sh executable
         run: chmod +x ./convert.sh
 
-      - name: Run convert.sh
-        run: ./convert.sh
-
-      - uses: docker://pandoc/core:3.5
+      - name: Run convert.sh with Pandoc in Docker
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace \
+            pandoc/core:3.5 \
+            bash convert.sh
