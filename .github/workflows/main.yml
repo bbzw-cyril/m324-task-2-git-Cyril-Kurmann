@@ -6,5 +6,10 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-22.04
     steps:
-      - run: convert.sh
+      - name: Make convert.sh executable
+        run: chmod +x convert.sh
+
+      - name: Run convert.sh
+        run: ./convert.sh
+
       - uses: docker://pandoc/core:3.5
