@@ -1,0 +1,10 @@
+name: Create index.html from readme.md
+
+on: push
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: convert.sh
+      - uses: docker://pandoc/core:3.5
