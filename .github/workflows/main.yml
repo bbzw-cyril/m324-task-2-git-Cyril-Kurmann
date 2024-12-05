@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: List files in the workspace
+        run: cd .. && cd ..
+
+      - name: ls
         run: ls -al
 
       - name: Make convert.sh executable
